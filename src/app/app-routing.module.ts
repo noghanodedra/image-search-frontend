@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-const routes: Routes = [];
+// tslint:disable-next-line: max-line-length
+const routes: Routes = [{ path: 'image-details', loadChildren: () => import('./components/image-details/image-details.module').then(m => m.ImageDetailsModule) }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

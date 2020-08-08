@@ -1,0 +1,11 @@
+<div class="container">
+  <br />
+  <h1>Image Details</h1>
+  <hr />
+
+  <app-search-bar (groupFilters)="filters = $event"></app-search-bar>
+
+  <br />
+
+  <app-list [groupFilters]="filters" [searchByKeyword]="searchText"></app-list>
+</div>
