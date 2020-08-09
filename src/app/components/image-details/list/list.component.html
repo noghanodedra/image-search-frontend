@@ -1,4 +1,4 @@
-<div class="container mt-5">
+<div class="container">
   <div
     class="search-results fixed inner"
     infiniteScroll
@@ -7,7 +7,7 @@
     [infiniteScrollThrottle]="100"
     (scrolled)="onScrollDown()"
   >
-    <div class="m-2">Record count: {{ records.length }}</div>
+    <div class="">Record count: {{ records.length }}</div>
     <section class="content" style="overflow: scroll; height: 400px;">
       <table class="table table-sm">
         <tr>

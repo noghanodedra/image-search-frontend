@@ -15,6 +15,7 @@ export class ImageDetailsComponent implements OnInit {
   currPage = 0;
   noRecords = false;
   loading = false;
+  serverError = false;
   HTTP_NO_CONTENT = 204;
 
   constructor(
@@ -41,6 +42,7 @@ export class ImageDetailsComponent implements OnInit {
   loadImageDetails(): void {
     this.loading = true;
     this.noRecords = false;
+    this.serverError = false;
     this.imageSearchService
       .search(
         this.currPage,
@@ -57,6 +59,11 @@ export class ImageDetailsComponent implements OnInit {
           }
         }
         this.loading = false;
-      });
+      },
+      (err) => {
+        this.serverError = true;
+        this.loading = false;
+      }
+      );
   }
 }

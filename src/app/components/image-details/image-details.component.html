@@ -1,27 +1,32 @@
 <div class="container">
-  <br />
-  <h2>Image Details</h2>
+  <h2 class="text-center mt-1 mb-1">Image Details</h2>
+  <hr />
   <app-search-bar (groupFilters)="onSearch($event)"></app-search-bar>
-  <div
-    *ngIf="loading && currPage === 0"
-    class="alert alert-primary mt-1"
-    role="alert"
-  >
-    Searching...
-  </div>
-  <div
-    *ngIf="loading && currPage > 0"
-    class="alert alert-primary mt-1"
-    role="alert"
-  >
-    Loading...
-  </div>
-  <div
-    *ngIf="noRecords && currPage === 0"
-    class="alert alert-info ml-3 mr-3 mt-1"
-    role="alert"
-  >
-    No records found.
+  <div class="messages mt-2" style="height: 80px;">
+    <div
+      *ngIf="loading && currPage === 0"
+      class="alert alert-primary ml-3 mr-3"
+      role="alert"
+    >
+      Searching...
+    </div>
+    <div
+      *ngIf="loading && currPage > 0"
+      class="alert alert-primary ml-3 mr-3"
+      role="alert"
+    >
+      Loading...
+    </div>
+    <div
+      *ngIf="noRecords && currPage === 0"
+      class="alert alert-info ml-3 mr-3"
+      role="alert"
+    >
+      No records found.
+    </div>
+    <div *ngIf="serverError" class="alert alert-danger ml-3 mr-3" role="alert">
+      Server error.
+    </div>
   </div>
   <app-list [records]="records" (loadMore)="onLoadMore($event)"></app-list>
 </div>
