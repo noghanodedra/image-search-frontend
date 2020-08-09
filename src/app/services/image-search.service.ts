@@ -1,16 +1,49 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpParams,
+  HttpErrorResponse,
+} from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ImageSearchService {
+  constructor(private http: HttpClient) {}
 
-   constructor(private http: HttpClient) {}
+  search(
+    page: number,
+    description?: string,
+    fileType?: string,
+    fileSize?: number
+  ): Observable<any> {
 
-  search(formData: FormData): Observable<any> {
-    return this.http.post(environment.imageSearchApiUrl, formData);
+    let params = new HttpParams().set('page', String(page));
+    if (description) {
+      params = params.set('description', description);
+    }
+    if (fileSize) {
+      params = params.set('fileSize', String(fileSize));
+    }
+    if (fileType) {
+      params = params.set('fileType', fileType);
+    }
+    return this.http
+      .get(environment.imageSearchApiUrl, { observe: 'response', params })
+      .pipe(catchError(this.handleError));
+  }
+  handleError(error: HttpErrorResponse): any {
+    let errorMessage = 'Unknown error!';
+    if (error.error instanceof ErrorEvent) {
+      // Client-side errors
+      errorMessage = `Error: ${error.error.message}`;
+    } else {
+      // Server-side errors
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    return throwError(errorMessage);
   }
 }

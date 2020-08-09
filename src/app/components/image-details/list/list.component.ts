@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-list',
@@ -6,10 +6,19 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent implements OnInit {
-  @Input() groupFilters: Object;
-  @Input() searchByKeyword: string;
-  
+  @Input() records = [];
+  @Output() loadMore: EventEmitter<any> = new EventEmitter<any>();
+
+  selector = '.content';
+
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log('rec', this.records);
+  }
+
+  onScrollDown() {
+    console.log('scrolled down!!', this.records);
+    this.loadMore.emit();
+  }
 }

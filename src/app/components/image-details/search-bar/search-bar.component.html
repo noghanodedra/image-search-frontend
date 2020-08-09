@@ -1,47 +1,42 @@
 <div class="search-bar container">
-  <form novalidate [formGroup]="form">
-    <h3>Group Filter</h3>
-    <div class="row">
-      <div class="col-md-5 m-1">
-        <input
-          type="text"
-          formControlName="description"
-          class="form-control"
-          placeholder="Description"
-        />
-      </div>
-      <div class="col-md-3 m-1">
-        <input
-          type="text"
-          formControlName="fileSize"
-          class="form-control"
-          placeholder="File Size"
-        />
-      </div>
-      <div class="col-md-3 m-1 mr-0">
-        <select
-          ngDefaultControl
-          class="form-control"
-          formControlName="fileType"
-        >
-          <option value="">- File type -</option>
-          <option
-            [ngValue]="allowedFileTypes"
-            *ngFor="let fileType of allowedFileTypes"
-            >{{ fileType }}</option
-          >
-        </select>
-      </div>
+  <form novalidate [formGroup]="form" class="form-inline">
+    <h3>Search Filters</h3>
+    <div class="form-group m-1">
+      <input
+        type="text"
+        formControlName="description"
+        class="form-control"
+        placeholder="Description"
+      />
     </div>
-    <div class="row">
-      <div class="col-md-12">
-        <button
-          class="btn btn-primary btn-m float-right"
-          (click)="search(form.value)"
+    <div class="form-group m-1">
+      <input
+        inputmode="numeric"
+        (keypress)="numberOnly($event)"
+        pattern="[0-9]*"
+        type="text"
+        formControlName="fileSize"
+        class="form-control"
+        placeholder="File Size"
+      />
+    </div>
+    <div class="form-group ml-0">
+      <select ngDefaultControl class="form-control" formControlName="fileType">
+        <option value="">- File type -</option>
+        <option
+          [ngValue]="fileType"
+          *ngFor="let fileType of allowedFileTypes"
+          >{{ fileType }}</option
         >
-          Search
-        </button>
-      </div>
+      </select>
+    </div>
+    <div class="form-group m-1">
+      <button
+        class="btn btn-primary btn-lg float-right"
+        (click)="search(form.value)"
+      >
+        Search
+      </button>
     </div>
   </form>
 </div>
