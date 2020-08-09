@@ -3,6 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ImageSearchService } from '../app/services/image-search.service';
+import { ImageDetailsModule } from '../app/components/image-details/image-details.module';
 
 import { AppComponent } from './app.component';
 
@@ -14,6 +15,7 @@ describe('AppComponent', () => {
         HttpClientTestingModule,
         ReactiveFormsModule,
         FormsModule,
+        ImageDetailsModule,
       ],
       providers: [ImageSearchService],
       declarations: [AppComponent],
@@ -36,6 +38,8 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('image-search-frontend app is running!');
+     expect(compiled.querySelector('.container h2').textContent).toContain(
+       'Image Details'
+     );
   });
 });

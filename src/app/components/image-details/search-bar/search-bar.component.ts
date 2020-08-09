@@ -27,14 +27,14 @@ export class SearchBarComponent implements OnInit {
     });
   }
 
-  search(filters: any): void {
+  onSearch(filters: any): void {
     Object.keys(filters).forEach((key) =>
       filters[key] === '' ? delete filters[key] : key
     );
     this.groupFilters.emit(filters);
   }
 
-  numberOnly(event): boolean {
+  checkNumberOnly(event: any): boolean {
     const charCode = event.which ? event.which : event.keyCode;
     if (charCode > 31 && (charCode < 48 || charCode > 57)) {
       return false;

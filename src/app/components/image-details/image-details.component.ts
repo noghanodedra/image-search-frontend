@@ -16,7 +16,6 @@ export class ImageDetailsComponent implements OnInit {
   noRecords = false;
   loading = false;
   serverError = false;
-  HTTP_NO_CONTENT = 204;
 
   constructor(
     private imageSearchService: ImageSearchService,
@@ -51,16 +50,14 @@ export class ImageDetailsComponent implements OnInit {
         this.searchFilterValues.fileSize
       )
       .subscribe((res) => {
-        if (res && res.status === this.HTTP_NO_CONTENT) {
+        if (!res) {
           this.noRecords = true;
         } else {
-          if (res.body) {
-            this.records.push(...res.body);
-          }
+            this.records.push(...res);
         }
         this.loading = false;
       },
-      (err) => {
+      (err: Error) => {
         this.serverError = true;
         this.loading = false;
       }

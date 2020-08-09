@@ -12,7 +12,7 @@
     <div class="form-group m-1">
       <input
         inputmode="numeric"
-        (keypress)="numberOnly($event)"
+        (keypress)="checkNumberOnly($event)"
         pattern="[0-9]*"
         type="text"
         formControlName="fileSize"
@@ -33,7 +33,7 @@
     <div class="form-group m-1">
       <button
         class="btn btn-primary btn-m float-right"
-        (click)="search(form.value)"
+        (click)="onSearch(form.value)"
       >
         Search
       </button>

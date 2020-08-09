@@ -4,14 +4,18 @@ import {
   HttpParams,
   HttpErrorResponse,
 } from '@angular/common/http';
+import { catchError, map } from 'rxjs/operators';
+
 import { environment } from '../../environments/environment';
+import { ImageDetails } from '../models/image-details';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ImageSearchService {
+  HTTP_NO_CONTENT = 204;
+
   constructor(private http: HttpClient) {}
 
   search(
@@ -19,8 +23,7 @@ export class ImageSearchService {
     description?: string,
     fileType?: string,
     fileSize?: number
-  ): Observable<any> {
-
+  ): Observable<ImageDetails[]> {
     let params = new HttpParams().set('page', String(page));
     if (description) {
       params = params.set('description', description);
@@ -31,17 +34,22 @@ export class ImageSearchService {
     if (fileType) {
       params = params.set('fileType', fileType);
     }
-    return this.http
-      .get(environment.imageSearchApiUrl, { observe: 'response', params })
-      .pipe(catchError(this.handleError));
-  }
-  handleError(error: HttpErrorResponse): any {
-    let errorMessage = 'Unknown error!';
-    if (error.error instanceof ErrorEvent) {
-      errorMessage = `Error: ${error.error.message}`;
-    } else {
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    if (environment.pageSize) {
+      params = params.set('size', String(environment.pageSize));
     }
-    return throwError(errorMessage);
+    return this.http
+      .get<ImageDetails[]>(environment.imageSearchApiUrl, {
+        observe: 'response',
+        params,
+      })
+      .pipe(
+        map((res) => res.body as ImageDetails[]),
+        catchError(this.handleError)
+      );
+  }
+
+  private handleError(err: HttpErrorResponse): Observable<never> {
+    const errMsg = err.message || 'Server error';
+    return throwError(errMsg);
   }
 }
