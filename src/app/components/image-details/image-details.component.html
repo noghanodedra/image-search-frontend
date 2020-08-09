@@ -1,17 +1,24 @@
 <div class="container">
   <br />
-  <h1>Image Details</h1>
-  <hr />
-
+  <h2>Image Details</h2>
   <app-search-bar (groupFilters)="onSearch($event)"></app-search-bar>
-
-  <br />
-  <div *ngIf="loading" class="alert alert-primary" role="alert">
+  <div
+    *ngIf="loading && currPage === 0"
+    class="alert alert-primary mt-1"
+    role="alert"
+  >
     Searching...
   </div>
   <div
+    *ngIf="loading && currPage > 0"
+    class="alert alert-primary mt-1"
+    role="alert"
+  >
+    Loading...
+  </div>
+  <div
     *ngIf="noRecords && currPage === 0"
-    class="alert alert-info ml-3 mr-3"
+    class="alert alert-info ml-3 mr-3 mt-1"
     role="alert"
   >
     No records found.

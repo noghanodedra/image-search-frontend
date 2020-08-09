@@ -31,7 +31,6 @@ export class SearchBarComponent implements OnInit {
     Object.keys(filters).forEach((key) =>
       filters[key] === '' ? delete filters[key] : key
     );
-    console.log(filters);
     this.groupFilters.emit(filters);
   }
 

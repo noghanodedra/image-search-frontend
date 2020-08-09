@@ -14,11 +14,9 @@ export class ListComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    console.log('rec', this.records);
   }
 
-  onScrollDown() {
-    console.log('scrolled down!!', this.records);
+  onScrollDown(): void {
     this.loadMore.emit();
   }
 }

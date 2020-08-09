@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container mt-5">
   <div
     class="search-results fixed inner"
     infiniteScroll
@@ -7,19 +7,20 @@
     [infiniteScrollThrottle]="100"
     (scrolled)="onScrollDown()"
   >
-    <section class="content" style="overflow: scroll; height: 40px;">
+    <div class="m-2">Record count: {{ records.length }}</div>
+    <section class="content" style="overflow: scroll; height: 400px;">
       <table class="table table-sm">
         <tr>
+          <th scope="col">Description</th>
           <th scope="col">File Type</th>
           <th scope="col">File Size</th>
-          <th scope="col">Description</th>
         </tr>
 
         <tbody>
-          <tr scope="row" *ngFor="let item of records">
-            <td>{{ item.fileType }}</td>
-            <td>{{ item.fileSize }}</td>
-            <td>{{ item.description }}</td>
+          <tr scope="row" *ngFor="let record of records">
+            <td>{{ record.description }}</td>
+            <td>{{ record.fileType }}</td>
+            <td>{{ record.fileSize }}</td>
           </tr>
         </tbody>
       </table>
