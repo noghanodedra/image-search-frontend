@@ -1,10 +1,10 @@
-import { TestBed, async } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { async, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ImageSearchService } from '../app/services/image-search.service';
-import { ImageDetailsModule } from '../app/components/image-details/image-details.module';
+import { RouterTestingModule } from '@angular/router/testing';
 
+import { ImageDetailsModule } from '../app/components/image-details/image-details.module';
+import { ImageSearchService } from '../app/services/image-search.service';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
@@ -38,8 +38,8 @@ describe('AppComponent', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
-     expect(compiled.querySelector('.container h2').textContent).toContain(
-       'Image Details'
-     );
+    expect(compiled.querySelector('.container h2').textContent).toContain(
+      'Image Details'
+    );
   });
 });

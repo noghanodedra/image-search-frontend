@@ -1,10 +1,10 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-
-import { ImageDetailsComponent } from './image-details.component';
-import { ImageSearchService } from '../../services/image-search.service';
-import { of, Observable, throwError } from 'rxjs';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { of, throwError } from 'rxjs';
 import { ImageDetails } from 'src/app/models/image-details';
+
+import { ImageSearchService } from '../../services/image-search.service';
+import { ImageDetailsComponent } from './image-details.component';
 
 describe('ImageDetailsComponent', () => {
   let component: ImageDetailsComponent;
@@ -21,8 +21,7 @@ describe('ImageDetailsComponent', () => {
         },
       ],
     }).compileComponents();
-     service = TestBed.inject(ImageSearchService);
-
+    service = TestBed.inject(ImageSearchService);
   }));
 
   beforeEach(() => {
@@ -36,7 +35,7 @@ describe('ImageDetailsComponent', () => {
   });
   it('should test onSearch function', () => {
     // arrange
-    const spyOnMethodOnSearch= spyOn(service, 'search').and.callThrough();
+    const spyOnMethodOnSearch = spyOn(service, 'search').and.callThrough();
     // act
     const event = new MouseEvent('click');
     component.onSearch(event);
@@ -47,7 +46,10 @@ describe('ImageDetailsComponent', () => {
   it('should test onLoadMore function', () => {
     // arrange
     const spyOnMethodOnSearch = spyOn(service, 'search').and.callThrough();
-    const spyOnMethodOnLoadMore = spyOn(component, 'onLoadMore').and.callThrough();
+    const spyOnMethodOnLoadMore = spyOn(
+      component,
+      'onLoadMore'
+    ).and.callThrough();
 
     // act
     const event = new MouseEvent('click');
@@ -55,7 +57,6 @@ describe('ImageDetailsComponent', () => {
     // assert
     expect(spyOnMethodOnSearch).toHaveBeenCalled();
     expect(spyOnMethodOnLoadMore).toHaveBeenCalled();
-
   });
 
   it('should call loadImageDetails and return list of image detail objects', async(() => {
@@ -81,5 +82,4 @@ describe('ImageDetailsComponent', () => {
     fixture.detectChanges();
     expect(component.noRecords).toBeTrue();
   }));
-
 });

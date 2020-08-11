@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  imageSearchApiUrl: 'http://localhost:8080/api/v1/images',
+  imageSearchApiUrl: 'http://localhost:8080/api/v1/images/details',
   pageSize: 20,
   allowedFileTypes: ['JPEG', 'PNG']
 };

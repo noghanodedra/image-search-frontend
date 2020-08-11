@@ -1,12 +1,9 @@
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
-import {
-  HttpClientTestingModule,
-  HttpTestingController,
-} from '@angular/common/http/testing';
 
-import { ImageSearchService } from './image-search.service';
 import { environment } from '../../environments/environment';
 import { ImageDetails } from '../models/image-details';
+import { ImageSearchService } from './image-search.service';
 
 describe('ImageSearchService', () => {
   let service: ImageSearchService;

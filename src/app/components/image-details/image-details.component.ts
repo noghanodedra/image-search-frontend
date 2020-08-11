@@ -1,6 +1,7 @@
-import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+
 import { ImageSearchService } from '../../services/image-search.service';
-import { HttpClient } from '@angular/common/http';
+
 @Component({
   selector: 'app-image-details',
   templateUrl: './image-details.component.html',
@@ -8,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class ImageDetailsComponent implements OnInit {
   searchText: string;
+  // tslint:disable-next-line: ban-types
   @Input() groupFilters: Object;
   @Input() searchByKeyword: string;
   records: any = [];
@@ -26,14 +28,14 @@ export class ImageDetailsComponent implements OnInit {
     this.loadImageDetails();
   }
 
-  onSearch(event): void {
+  onSearch(event: any): void {
     this.searchFilterValues = event;
     this.currPage = 0;
     this.records = [];
     this.loadImageDetails();
   }
 
-  onLoadMore(event): void {
+  onLoadMore(event: any): void {
     this.currPage++;
     this.loadImageDetails();
   }
@@ -49,18 +51,19 @@ export class ImageDetailsComponent implements OnInit {
         this.searchFilterValues.fileType,
         this.searchFilterValues.fileSize
       )
-      .subscribe((res) => {
-        if (!res) {
-          this.noRecords = true;
-        } else {
+      .subscribe(
+        (res) => {
+          if (!res) {
+            this.noRecords = true;
+          } else {
             this.records.push(...res);
+          }
+          this.loading = false;
+        },
+        (err: Error) => {
+          this.serverError = true;
+          this.loading = false;
         }
-        this.loading = false;
-      },
-      (err: Error) => {
-        this.serverError = true;
-        this.loading = false;
-      }
       );
   }
 }

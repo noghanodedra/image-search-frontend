@@ -1,14 +1,10 @@
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {
-  HttpClient,
-  HttpParams,
-  HttpErrorResponse,
-} from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 import { environment } from '../../environments/environment';
 import { ImageDetails } from '../models/image-details';
-import { Observable, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',

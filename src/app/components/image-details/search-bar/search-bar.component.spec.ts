@@ -1,8 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
 
 import { SearchBarComponent } from './search-bar.component';
-import { By } from '@angular/platform-browser';
 
 describe('SearchBarComponent', () => {
   let component: SearchBarComponent;
@@ -11,9 +11,8 @@ describe('SearchBarComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [FormsModule, ReactiveFormsModule],
-      declarations: [ SearchBarComponent ]
-    })
-    .compileComponents();
+      declarations: [SearchBarComponent],
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -64,5 +63,4 @@ describe('SearchBarComponent', () => {
     component.checkNumberOnly(event);
     expect(component.checkNumberOnly).toHaveBeenCalledWith(event);
   });
-
 });
